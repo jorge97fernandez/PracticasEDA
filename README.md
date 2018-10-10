@@ -8,4 +8,4 @@ Codigo correspondiente a las practicas de EDA del curso 2018-2019
 ## Practica 0
    * Contiene el modulo cancion(.h y .cc) que define el tipo de dato Cancion.
    * Tambien contiene el modulo generico(.h y .cc) que implementa la función generaCadena para cualquier tipo de dato.
-   * En el se encuentra tambien el modulo generico Diccionario(diccionario.h) que define el conjunto de datos sobre el que se va a trabajar
+   * En el se encuentra tambien el modulo generico Diccionario(diccionario.h) que define el tipo de datos sobre el que se va a trabajar
