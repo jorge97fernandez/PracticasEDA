@@ -14,3 +14,30 @@ Codigo correspondiente a las practicas de EDA del curso 2018-2019
 ## Practica 1(tareas pendientes):
    *  Recopilacion:
       * ##  crear
+      * ##  cardinal
+      * ##  tamañoTotal
+      * ##  existe
+      * ##  introducir
+      * ##  obtenerDato
+      * ##  recolocarEnPuesto
+      * ##  eliminarXPuesto
+      * ##  obtenerXPuesto
+      * ##  puestoDeClave
+      * ##  iniciarIterador
+      * ##  existeSiguiente
+      * ##  siguienteClave
+      * ##  siguienteDato
+      * ##  avanza
+      
+   *  albumDeCanciones
+      * ##  crear
+      * ##  numeroDeCanciones
+      * ##  duracion
+      * ##  existeCancion
+      * ##  obtenerCancion
+      * ##  añadirCancion
+      * ##  eliminarCancion
+      * ##  puestoDeCancion
+      * ##  cancionDePuesto
+      * ##  intercambiarCanciones
+      * ##  listarAlbum
