@@ -15,14 +15,16 @@ string nombreAutor (Cancion& c);
 int anyoComposicion(Cancion& c);
 int duracion(Cancion& c);
 string generaCadena(Cancion&c);
+int tamanyo(Cancion&c);
 
 struct Cancion{
-   friend Cancion crear(string nombreC, string nombreA, int anyo, int duracion);
-   friend string nombreCancion(Cancion& c);
-   friend string nombreAutor (Cancion& c);
-   friend int anyoComposicion(Cancion& c);
-   friend int duracion(Cancion& c);
-   friend string generaCadena(Cancion&c);
+    friend Cancion crear(string nombreC, string nombreA, int anyo, int duracion);
+    friend string nombreCancion(Cancion& c);
+    friend string nombreAutor (Cancion& c);
+    friend int anyoComposicion(Cancion& c);
+    friend int duracion(Cancion& c);
+    friend string generaCadena(Cancion&c);
+    friend int tamanyo(Cancion&c);
 
 private:
     string nombreCanc;

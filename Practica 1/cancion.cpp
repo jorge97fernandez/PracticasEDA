@@ -25,6 +25,9 @@ int duracion(Cancion& c){
 }
 string generaCadena(Cancion&c){
     return c.nombreCanc + " --- " + c.nombreAut + " --- "
-    + to_string(c.anyoComp) + " ( " + to_string(c.durac)+ " )";
+           + to_string(c.anyoComp) + " ( " + to_string(c.durac)+ " )";
+}
+int tamanyo(Cancion&c){
+    return 8+ c.nombreAut.size() + c.nombreCanc.size();
 }
 
