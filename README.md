@@ -13,10 +13,7 @@ Codigo correspondiente a las practicas de EDA del curso 2018-2019
    
 ## Practica 1(tareas pendientes):
    *  Recopilacion:
-      * ##  crear
-      * ##  cardinal
-      * ##  tamañoTotal
-      * ##  existe
+      * ##  existe(falta probar)
       * ##  introducir
       * ##  obtenerDato
       * ##  recolocarEnPuesto
