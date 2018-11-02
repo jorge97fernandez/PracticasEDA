@@ -1,7 +1,7 @@
 //**********************************************************************************************************************
 // Archivo: recopilacion.h
 // Autor:   Andrés Gavín Murillo 716358
-// Autor:   Jorge ...
+// Autor:   Jorge Fernandez Muñoz 721529
 // Fecha:   Noviembre 2018
 // Coms:    EDA - Práctica 1 - TAD Recopilación
 //**********************************************************************************************************************
@@ -76,7 +76,7 @@ template<typename C, typename V> void obtenerXPuesto (Recopilacion<C,V> &r, int 
 
 /* Si existe(r,k), devuelve el puesto del par (k,v) en r, en puesto, y en error devuelve false.
  * Parcial: se precisa que existe(r,k); de lo contrario, en error devuelve true. */
-template<typename C, typename V> void puestoDeClave (Recopilacion<C,V> &r, int &puesto, bool &error);
+template<typename C, typename V> void puestoDeClave (Recopilacion<C,V> &r,C &clave, int &puesto, bool &error);
 
 /* Inicializa el iterador para recorrer los pares de la recopilación r, de forma que el siguiente par sea el del primer
  * puesto de la recopilación r (situación de no haber visitado ningún par). */
@@ -111,7 +111,7 @@ struct Recopilacion {
     friend void recolocarEnPuesto<C,V> (Recopilacion<C,V> &r, C &k, int delta);
     friend void eliminarXPuesto<C,V> (Recopilacion<C,V> &r, int p);
     friend void obtenerXPuesto<C,V> (Recopilacion<C,V> &r, int p, C &clave, bool &error);
-    friend void puestoDeClave<C,V> (Recopilacion<C,V> &r, int &puesto, bool &error);
+    friend void puestoDeClave<C,V> (Recopilacion<C,V> &r,C &clave, int &puesto, bool &error);
     friend void iniciarIterador<C,V> (Recopilacion<C,V> &r);
     friend bool existeSiguiente<C,V> (Recopilacion<C,V> &r);
     friend void siguienteClave<C,V> (Recopilacion<C,V> &r, C &clave, bool &error);
@@ -247,7 +247,27 @@ void obtenerDato (Recopilacion<C,V> &r, C &k, V &dato, bool &error) {
 
 /* Si existe el Par (k,v): mueve su posición relativa delta posiciones y !error; sino: error. */
 template<typename C, typename V>
-void recolocarEnPuesto (Recopilacion<C,V> &r, C &k, int delta);
+void recolocarEnPuesto (Recopilacion<C,V> &r, C &k, int delta){
+    bool encontrado;
+    int puestoPar=1;
+    typename Recopilacion<C,V>::Par *aux = r.inicial;
+    while(aux!= nullptr && !encontrado){
+        if(aux->clave==k){
+            encontrado=true;
+        }
+        else{
+            aux=aux->siguiente;
+            puestoPar++;
+        }
+    }
+    if(encontrado){
+        int nuevaPosicion= puestoPar+delta;
+        if(1<=nuevaPosicion && nuevaPosicion<=cardinal(r)){
+            typename Recopilacion<C,V>::Par *anterior = aux->siguiente;
+            typename Recopilacion<C,V>::Par *siguiente = r.inicial;
+        }
+    }
+}
 
 /* Si 1<=p<=cardinal(r): elimina el Par que ocupe la posición p. */
 template<typename C, typename V>
@@ -291,11 +311,45 @@ void eliminarXPuesto (Recopilacion<C,V> &r, int p) {
 
 /* Si 1<=p<=cardinal(r): clave=(clave del Par que ocupa la posición p) y !error; sino: error. */
 template<typename C, typename V>
-void obtenerXPuesto (Recopilacion<C,V> &r, int p, C &clave, bool &error);
+void obtenerXPuesto (Recopilacion<C,V> &r, int p, C &clave, bool &error){
+    if(p<1 || p> cardinal(r)){
+        error =true;
+    }
+    else{
+        typename Recopilacion<C,V>::Par *aux = r.inicial;
+        int puesto=1;
+        while(puesto!=p){
+            aux=aux->siguiente;
+            puesto++;
+            }
+        clave =aux->clave;
+        error=false;
+    }
+}// O(n)
 
 /* Si existe(r,k): puesto=(puesto del Par con clave k) y !error; sino: error. */
 template<typename C, typename V>
-void puestoDeClave (Recopilacion<C,V> &r, int &puesto, bool &error);
+void puestoDeClave (Recopilacion<C,V> &r,C &clave, int &puesto, bool &error){
+    bool encontrado;
+    int puestoPar=1;
+    typename Recopilacion<C,V>::Par *aux = r.inicial;
+    while(aux!= nullptr && !encontrado){
+        if(aux->clave==clave){
+            encontrado=true;
+            puesto=puestoPar;
+        }
+        else{
+            aux=aux->siguiente;
+            puestoPar++;
+        }
+    }
+    if(encontrado){
+        error=false;
+    }
+    else{
+        error=true;
+    }
+}//O(n)
 
 /* Inicializa el iterador. */
 template<typename C, typename V>
