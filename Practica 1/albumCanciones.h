@@ -2,7 +2,7 @@
 // Archivo: albumCanciones.h
 // Autor: Andrés Gavín Murillo 716358
 // Autor: Jorge Fernández Muñoz 721529
-// Fecha: Noviembre 2018
+// Fecha: 3 Noviembre 2018
 // Coms: EDA - Practica 1 - TAD albumCanciones
 //
 
