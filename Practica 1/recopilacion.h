@@ -248,23 +248,79 @@ void obtenerDato (Recopilacion<C,V> &r, C &k, V &dato, bool &error) {
 /* Si existe el Par (k,v): mueve su posición relativa delta posiciones y !error; sino: error. */
 template<typename C, typename V>
 void recolocarEnPuesto (Recopilacion<C,V> &r, C &k, int delta){
-    bool encontrado;
-    int puestoPar=1;
+    bool encontrado = false, posibleMovimiento = false;
+    int puestoPar = 1;
     typename Recopilacion<C,V>::Par *aux = r.inicial;
-    while(aux!= nullptr && !encontrado){
-        if(aux->clave==k){
-            encontrado=true;
+    typename Recopilacion<C,V>::Par *tupla;
+    typename Recopilacion<C,V>::Par *aux2;
+    if(aux != nullptr && delta != 0) {
+        if(aux -> clave == k){
+            tupla= r.inicial;
+            aux = nullptr;
+            aux2 = r.inicial -> siguiente;
+            encontrado = true;
+            if( delta > 0 && cardinal(r) > 1){
+                posibleMovimiento = true;
+            }
         }
         else{
-            aux=aux->siguiente;
-            puestoPar++;
+            while( aux -> siguiente != nullptr && !encontrado){
+                if( aux -> siguiente -> clave == k){
+                    encontrado = true;
+                    puestoPar++;
+                }
+                else{
+                    aux = aux -> siguiente;
+                    puestoPar ++;
+                }
+            }
+            tupla= aux -> siguiente;
+            aux2= tupla -> siguiente;
+            if( aux2 == nullptr && delta > 0){
+                posibleMovimiento = false;
+            }
+            else{
+                posibleMovimiento = true;
+            }
         }
-    }
-    if(encontrado){
-        int nuevaPosicion= puestoPar+delta;
-        if(1<=nuevaPosicion && nuevaPosicion<=cardinal(r)){
-            typename Recopilacion<C,V>::Par *anterior = aux->siguiente;
-            typename Recopilacion<C,V>::Par *siguiente = r.inicial;
+        if (encontrado && posibleMovimiento){
+            if(tupla == r.inicial){
+                r.inicial= aux2;
+                tupla ->siguiente == nullptr;
+            }
+            else if( r.final == tupla){
+                r.final = aux;
+                aux -> siguiente == nullptr;
+            }
+            else{
+                aux -> siguiente = aux2;
+                tupla -> siguiente =nullptr;
+            }
+            int posicionFinal= puestoPar + delta;
+            if(posicionFinal<=1){
+                tupla -> siguiente= r.inicial;
+                r.inicial = tupla;
+            }
+            else if( posicionFinal >= cardinal(r)){
+                r.final -> siguiente = tupla;
+                r.final = tupla;
+            }
+            else{
+                encontrado=false;
+                int pos=1;
+                typename Recopilacion<C,V>::Par *busqueda= r.inicial;
+                while(!encontrado){
+                    if(pos+1 == posicionFinal){
+                        encontrado = true;
+                        tupla -> siguiente= busqueda -> siguiente;
+                        busqueda -> siguiente = tupla;
+                    }
+                    else{
+                        pos ++;
+                        busqueda= busqueda -> siguiente;
+                    }
+                }
+            }
         }
     }
 }
