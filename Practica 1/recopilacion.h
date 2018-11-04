@@ -9,6 +9,7 @@
 #ifndef RECOPILACION_H
 #define RECOPILACION_H
 
+
 // Interfaz del TAD Recopilación. Pre-declaraciones:
 
 /* Los valores del TAD representan conjuntos de pares (clave,dato), en los que no se permiten claves repetidas, y que
@@ -290,7 +291,7 @@ void recolocarEnPuesto (Recopilacion<C,V> &r, C &k, int delta){
             }
             else if( r.final == tupla){
                 r.final = aux;
-                aux -> siguiente == nullptr;
+                aux -> siguiente = nullptr;
             }
             else{
                 aux -> siguiente = aux2;
@@ -386,7 +387,7 @@ void obtenerXPuesto (Recopilacion<C,V> &r, int p, C &clave, bool &error){
 /* Si existe(r,k): puesto=(puesto del Par con clave k) y !error; sino: error. */
 template<typename C, typename V>
 void puestoDeClave (Recopilacion<C,V> &r,C &clave, int &puesto, bool &error){
-    bool encontrado;
+    bool encontrado=false;
     int puestoPar=1;
     typename Recopilacion<C,V>::Par *aux = r.inicial;
     while(aux!= nullptr && !encontrado){
