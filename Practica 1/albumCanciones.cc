@@ -2,7 +2,7 @@
 // Archivo: albumCanciones.cc
 // Autor: Andrés Gavín Murillo 716358
 // Autor: Jorge Fernández Muñoz 721529
-// Fecha: Noviembre 2018
+// Fecha: 4 Noviembre 2018
 // Coms: EDA - Practica 1 - TAD albumCanciones
 //
 
@@ -17,32 +17,35 @@ void crear(albumCanciones &a,string titulo){
     a.duracionTotal=0;
     crear(a.Canciones);
 }
-int numCanciones(albumCanciones &a){
+int numCanciones(const albumCanciones &a){
     return cardinal(a.Canciones);
 }
-int duracion (albumCanciones &a){
+int duracion (const albumCanciones &a){
     return a.duracionTotal;
 }
-bool existeCancion(albumCanciones &a, string s){
+string tituloDeAlbum(const albumCanciones &a){
+    return a.tituloAlbum;
+}
+bool existeCancion(const albumCanciones &a,const string s){
     return existe(a.Canciones,s);
 }
-void obtenerCancion(albumCanciones &a, string s, Cancion &c, bool &error){
+void obtenerCancion(const albumCanciones &a,const string s, Cancion &c, bool &error){
     obtenerDato(a.Canciones,s,c,error);
 }
-void anyadirCancion(albumCanciones &a, string s, Cancion c){
+void anyadirCancion(albumCanciones &a,const string s,const Cancion c){
     introducir(a.Canciones,s,c);
     a.duracionTotal+= duracion(c);
 }
 void eliminarCancion(albumCanciones &a, int puesto){
     eliminarXPuesto(a.Canciones,puesto);
 }
-void puestodeCancion(albumCanciones &a, string s, int &puesto, bool &error){
+void puestodeCancion(const albumCanciones &a,const string s, int &puesto, bool &error){
     puestoDeClave(a.Canciones,s,puesto,error);
 }
-void canciondePuesto(albumCanciones &a, int puesto, string &clave, bool &error){
+void canciondePuesto(const albumCanciones &a, int puesto, string &clave, bool &error){
     obtenerXPuesto(a.Canciones,puesto,clave,error);
 }
-void intercambiarCanciones( albumCanciones &a, string s, string b){
+void intercambiarCanciones( albumCanciones &a,const string s,const string b){
     int puestoa,puestob;
     bool errora,errorb;
     puestoDeClave(a.Canciones,s,puestoa,errora);
@@ -69,7 +72,7 @@ void listarAlbum( albumCanciones &a){
         siguienteClave(a.Canciones,Clave,error);
         siguienteDato(a.Canciones,dato,error);
         puestoDeClave(a.Canciones,Clave,puesto,error);
-        cout << puesto <<") " << generaCadena(Clave) << ":::" << generaCadena(dato) <<endl;
+        cout << puesto <<") " << generaCadena(Clave) << ":::" << "<* "<< generaCadena(dato) << "*>" <<endl;
         avanza(a.Canciones,error);
     }
 }
