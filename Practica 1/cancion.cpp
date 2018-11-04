@@ -1,6 +1,10 @@
-//
-// Created by jorge on 04/10/2018.
-//
+//**********************************************************************************************************************
+// Archivo: cancion.cpp
+// Autor:   Andrés Gavín Murillo 716358
+// Autor:   Jorge Fernandez Muñoz 721529
+// Fecha:   4 Noviembre 2018
+// Coms:    EDA - Práctica 1 - TAD Cancion
+//**********************************************************************************************************************
 #include "cancion.h"
 
 Cancion crear(string nombreC, string nombreA, int anyo, int duracion){
@@ -11,23 +15,23 @@ Cancion crear(string nombreC, string nombreA, int anyo, int duracion){
     c.durac=duracion;
     return c;
 }
-string nombreCancion(Cancion& c){
+string nombreCancion(const Cancion& c){
     return c.nombreCanc;
 }
-string nombreAutor (Cancion& c){
+string nombreAutor (const Cancion& c){
     return c.nombreAut;
 }
-int anyoComposicion(Cancion& c){
+int anyoComposicion(const Cancion& c){
     return c.anyoComp;
 }
-int duracion(Cancion& c){
+int duracion(const Cancion& c){
     return c.durac;
 }
-string generaCadena(Cancion&c){
+string generaCadena(const Cancion&c){
     return c.nombreCanc + " --- " + c.nombreAut + " --- "
            + to_string(c.anyoComp) + " ( " + to_string(c.durac)+ " )";
 }
-int tamanyo(Cancion&c){
+int tamanyo(const Cancion&c){
     return 8+ c.nombreAut.size() + c.nombreCanc.size();
 }
 

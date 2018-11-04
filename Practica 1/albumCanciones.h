@@ -2,7 +2,7 @@
 // Archivo: albumCanciones.h
 // Autor: Andrés Gavín Murillo 716358
 // Autor: Jorge Fernández Muñoz 721529
-// Fecha: 3 Noviembre 2018
+// Fecha: 4 Noviembre 2018
 // Coms: EDA - Practica 1 - TAD albumCanciones
 //
 
@@ -17,28 +17,30 @@ using namespace std;
 #define ALBUMCANCIONES_H
 struct albumCanciones;
 void crear(albumCanciones &a,string titulo);
-int numCanciones(albumCanciones &a);
-int duracion (albumCanciones &a);
-bool existeCancion(albumCanciones &a, string s);
-void obtenerCancion(albumCanciones &a, string s, Cancion &c, bool &error);
-void anyadirCancion(albumCanciones &a, string s, Cancion c);
+int numCanciones(const albumCanciones &a);
+int duracion (const albumCanciones &a);
+string tituloDeAlbum(const albumCanciones &a);
+bool existeCancion(const albumCanciones &a,const string s);
+void obtenerCancion(const albumCanciones &a,const  string s, Cancion &c, bool &error);
+void anyadirCancion(albumCanciones &a,const string s,const Cancion c);
 void eliminarCancion(albumCanciones &a, int puesto);
-void puestodeCancion(albumCanciones &a, string s, int &puesto, bool &error);
-void canciondePuesto(albumCanciones &a, int puesto, string &clave, bool &error);
-void intercambiarCanciones( albumCanciones &a, string s, string b);
+void puestodeCancion(const albumCanciones &a,const string s, int &puesto, bool &error);
+void canciondePuesto(const albumCanciones &a, int puesto, string &clave, bool &error);
+void intercambiarCanciones( albumCanciones &a,const string s,const string b);
 void listarAlbum( albumCanciones &a);
 
 struct albumCanciones{
    friend void crear(albumCanciones &a,string titulo);
-   friend int numCanciones(albumCanciones &a);
-   friend int duracion (albumCanciones &a);
-   friend bool existeCancion(albumCanciones &a, string s);
-   friend void obtenerCancion(albumCanciones &a, string s, Cancion &c, bool &error);
-   friend void anyadirCancion(albumCanciones &a, string s, Cancion c);
+   friend int numCanciones(const albumCanciones &a);
+   friend int duracion (const albumCanciones &a);
+   friend string tituloDeAlbum(const albumCanciones &a);
+   friend bool existeCancion(const albumCanciones &a,const string s);
+   friend void obtenerCancion(const albumCanciones &a,const string s, Cancion &c, bool &error);
+   friend void anyadirCancion(albumCanciones &a,const string s,const Cancion c);
    friend void eliminarCancion(albumCanciones &a, int puesto);
-   friend void puestodeCancion(albumCanciones &a, string s, int &puesto, bool &error);
-   friend void canciondePuesto(albumCanciones &a, int puesto, string &clave, bool &error);
-   friend void intercambiarCanciones( albumCanciones &a, string s, string b);
+   friend void puestodeCancion(const albumCanciones &a,const string s, int &puesto, bool &error);
+   friend void canciondePuesto(const  albumCanciones &a, int puesto, string &clave, bool &error);
+   friend void intercambiarCanciones( albumCanciones &a,const string s,const string b);
    friend void listarAlbum( albumCanciones &a);
 
 private:
