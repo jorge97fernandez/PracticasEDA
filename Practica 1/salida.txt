@@ -1,0 +1,51 @@
+cancion DESCONOCIDA: C1
+INSERCION: CM_GM_Sinf3:::<* Symphony N.3 --- Gustav Mahler --- 1896 ( 6300 )*>
+INSERCION: BD_ult_cd2-13:::<* Hurricane --- Bob Dylan --- 1975 ( 512 )*>
+INSERCION: LoTR_FR-cd3-1:::<* Khazad-dum --- Howard Shore --- 2001 ( 480 )*>
+TITULO: Mi lista de canciones
+DURACION TOTAL: 7292
+NUMERO de canciones: 3
+1) CM_GM_Sinf3:::<* Symphony N.3 --- Gustav Mahler --- 1896 ( 6300 )*>
+2) BD_ult_cd2-13:::<* Hurricane --- Bob Dylan --- 1975 ( 512 )*>
+3) LoTR_FR-cd3-1:::<* Khazad-dum --- Howard Shore --- 2001 ( 480 )*>
+ENCONTRADA: 2 ... BD_ult_cd2-13:::<* Hurricane --- Bob Dylan --- 1975 ( 512 )*>
+eliminacion de pista INNECESARIA: 9
+ACTUALIZACION: BD_ult_cd2-13:::<* Hurricane --- Bob Dylan y J. Levy --- 1975 ( 512 )*>
+TITULO: Mi lista de canciones
+DURACION TOTAL: 7292
+NUMERO de canciones: 3
+1) CM_GM_Sinf3:::<* Symphony N.3 --- Gustav Mahler --- 1896 ( 6300 )*>
+2) BD_ult_cd2-13:::<* Hurricane --- Bob Dylan y J. Levy --- 1975 ( 512 )*>
+3) LoTR_FR-cd3-1:::<* Khazad-dum --- Howard Shore --- 2001 ( 480 )*>
+INSERCION: BD_ult_cd1-7:::<* Boots Of Spanish Leather --- Bob Dylan --- 1964 ( 278 )*>
+INSERCION: BD_ult_cd3-14:::<* Dark Eyes --- Bob Dylan --- 1985 ( 309 )*>
+TITULO: Mi lista de canciones
+DURACION TOTAL: 7879
+NUMERO de canciones: 5
+1) CM_GM_Sinf3:::<* Symphony N.3 --- Gustav Mahler --- 1896 ( 6300 )*>
+2) BD_ult_cd2-13:::<* Hurricane --- Bob Dylan y J. Levy --- 1975 ( 512 )*>
+3) LoTR_FR-cd3-1:::<* Khazad-dum --- Howard Shore --- 2001 ( 480 )*>
+4) BD_ult_cd1-7:::<* Boots Of Spanish Leather --- Bob Dylan --- 1964 ( 278 )*>
+5) BD_ult_cd3-14:::<* Dark Eyes --- Bob Dylan --- 1985 ( 309 )*>
+INTERCAMBIAR: 
+pista A) 4 ... BD_ult_cd1-7:::<* Boots Of Spanish Leather --- Bob Dylan --- 1964 ( 278 )*>
+pista B) 2 ... BD_ult_cd2-13:::<* Hurricane --- Bob Dylan y J. Levy --- 1975 ( 512 )*>
+TITULO: Mi lista de canciones
+DURACION TOTAL: 7879
+NUMERO de canciones: 5
+1) CM_GM_Sinf3:::<* Symphony N.3 --- Gustav Mahler --- 1896 ( 6300 )*>
+2) BD_ult_cd1-7:::<* Boots Of Spanish Leather --- Bob Dylan --- 1964 ( 278 )*>
+3) LoTR_FR-cd3-1:::<* Khazad-dum --- Howard Shore --- 2001 ( 480 )*>
+4) BD_ult_cd2-13:::<* Hurricane --- Bob Dylan y J. Levy --- 1975 ( 512 )*>
+5) BD_ult_cd3-14:::<* Dark Eyes --- Bob Dylan --- 1985 ( 309 )*>
+pista INEXISTENTE: 9
+PISTA: 3 ... LoTR_FR-cd3-1:::<* Khazad-dum --- Howard Shore --- 2001 ( 480 )*>
+pista ELIMINADA: 3 ... LoTR_FR-cd3-1:::<* Khazad-dum --- Howard Shore --- 2001 ( 480 )*>
+TITULO: Mi lista de canciones
+DURACION TOTAL: 7399
+NUMERO de canciones: 4
+1) CM_GM_Sinf3:::<* Symphony N.3 --- Gustav Mahler --- 1896 ( 6300 )*>
+2) BD_ult_cd1-7:::<* Boots Of Spanish Leather --- Bob Dylan --- 1964 ( 278 )*>
+3) BD_ult_cd2-13:::<* Hurricane --- Bob Dylan y J. Levy --- 1975 ( 512 )*>
+4) BD_ult_cd3-14:::<* Dark Eyes --- Bob Dylan --- 1985 ( 309 )*>
+intercambio IMPOSIBLE: C1 ### CM_GM_Sinf3

@@ -190,7 +190,7 @@ void introducir (Recopilacion<C,V> &r,const C &k,const V &v) {
         if (aux->clave == k) {
             // ya existe un Par con clave k
             encontrado = true;
-            r.tamanyo -= tamanyo(v); // Operación de V
+            r.tamanyo -= tamanyo(aux ->valor); // Operación de V
             aux->valor = v;
             r.tamanyo += tamanyo(v); // Operación de V
         }
@@ -348,11 +348,11 @@ void eliminarXPuesto (Recopilacion<C,V> &r, int p) {
 
                 r.numDatos--;
                 r.tamanyo -= tamanyo(aux->valor);
-                aux2 = aux->siguiente;
+                aux2 -> siguiente = aux->siguiente;
 
                 if (p == 1) {
                     // el elemento borrado era el primero
-                    r.inicial = aux2;
+                    r.inicial = aux ->siguiente;
                 }
 
                 delete(aux);

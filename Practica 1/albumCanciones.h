@@ -27,7 +27,7 @@ void eliminarCancion(albumCanciones &a, int puesto);
 void puestodeCancion(const albumCanciones &a,const string s, int &puesto, bool &error);
 void canciondePuesto(const albumCanciones &a, int puesto, string &clave, bool &error);
 void intercambiarCanciones( albumCanciones &a,const string s,const string b);
-void listarAlbum( albumCanciones &a);
+string listarAlbum( albumCanciones &a);
 
 struct albumCanciones{
    friend void crear(albumCanciones &a,string titulo);
@@ -41,7 +41,7 @@ struct albumCanciones{
    friend void puestodeCancion(const albumCanciones &a,const string s, int &puesto, bool &error);
    friend void canciondePuesto(const  albumCanciones &a, int puesto, string &clave, bool &error);
    friend void intercambiarCanciones( albumCanciones &a,const string s,const string b);
-   friend void listarAlbum( albumCanciones &a);
+   friend string listarAlbum( albumCanciones &a);
 
 private:
     string tituloAlbum;

@@ -1,0 +1,59 @@
+LC
+C1
+AC
+CM_GM_Sinf3
+Symphony N.3
+Gustav Mahler
+1896
+6300
+AC
+BD_ult_cd2-13
+Hurricane
+Bob Dylan
+1975
+512
+AC
+LoTR_FR-cd3-1
+Khazad-dum
+Howard Shore
+2001
+480
+LA
+LC
+BD_ult_cd2-13
+EP
+9
+AC
+BD_ult_cd2-13
+Hurricane
+Bob Dylan y J. Levy
+1975
+512
+LA
+AC
+BD_ult_cd1-7
+Boots Of Spanish Leather
+Bob Dylan
+1964
+278
+AC
+BD_ult_cd3-14
+Dark Eyes
+Bob Dylan
+1985
+309
+LA
+OA
+BD_ult_cd1-7
+BD_ult_cd2-13
+LA
+LP
+9
+LP
+3
+EP
+3
+LA
+OA
+C1
+CM_GM_Sinf3
