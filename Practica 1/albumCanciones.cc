@@ -33,11 +33,23 @@ void obtenerCancion(const albumCanciones &a,const string s, Cancion &c, bool &er
     obtenerDato(a.Canciones,s,c,error);
 }
 void anyadirCancion(albumCanciones &a,const string s,const Cancion c){
+    if(existeCancion(a,s)){
+        Cancion vieja;
+        bool error;
+        obtenerCancion(a,s,vieja,error);
+        a.duracionTotal-= duracion(vieja);
+    }
     introducir(a.Canciones,s,c);
     a.duracionTotal+= duracion(c);
 }
 void eliminarCancion(albumCanciones &a, int puesto){
+    Cancion elim;
+    string clave;
+    bool error;
+    canciondePuesto(a,puesto,clave,error);
+    obtenerCancion(a,clave,elim,error);
     eliminarXPuesto(a.Canciones,puesto);
+    a.duracionTotal-= duracion(elim);
 }
 void puestodeCancion(const albumCanciones &a,const string s, int &puesto, bool &error){
     puestoDeClave(a.Canciones,s,puesto,error);
@@ -62,18 +74,21 @@ void intercambiarCanciones( albumCanciones &a,const string s,const string b){
     }
 
 }
-void listarAlbum( albumCanciones &a){
+string listarAlbum( albumCanciones &a){
     iniciarIterador(a.Canciones);
     string Clave;
     Cancion dato;
     bool error;
     int puesto;
+    string respuesta="";
     while( existeSiguiente(a.Canciones)){
         siguienteClave(a.Canciones,Clave,error);
         siguienteDato(a.Canciones,dato,error);
         puestoDeClave(a.Canciones,Clave,puesto,error);
-        cout << puesto <<") " << generaCadena(Clave) << ":::" << "<* "<< generaCadena(dato) << "*>" <<endl;
+        cout << "Puesto = " <<puesto <<endl;
+        respuesta= respuesta + generaCadena(puesto) + ") " + generaCadena(Clave) + ":::" + "<* "+ generaCadena(dato) + "*>" + '\n';
         avanza(a.Canciones,error);
     }
+    return respuesta;
 }
 
