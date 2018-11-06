@@ -2,7 +2,7 @@
 // Archivo: recopilacion.h
 // Autor:   Andrés Gavín Murillo 716358
 // Autor:   Jorge Fernandez Muñoz 721529
-// Fecha:   4 Noviembre 2018
+// Fecha:   7 Noviembre 2018
 // Coms:    EDA - Práctica 1 - TAD Recopilación
 //**********************************************************************************************************************
 
@@ -30,14 +30,14 @@
  * El TAD que se use para el dato, debe tener definidas las siguientes operaciones:
  *    string to_string (dato v) {Transformación a cadena}
  *    int tamanyo (dato v) {Devuelve el tamaño de un dato v}
- *    */
+ */
 template<typename C, typename V> struct Recopilacion;
 
 /* Devuelve una recopilación vacía, sin elementos (pares). */
 template<typename C, typename V> void crear (Recopilacion<C,V> &r);
 
 /* Devuelve el número de pares en la recopilación r. */
-template<typename C, typename V> int cardinal ( const Recopilacion<C,V> &r);
+template<typename C, typename V> int cardinal (const Recopilacion<C,V> &r);
 
 /* Devuelve el tamaño total de la recopilación r, es decir, la suma total de los tamaños de los datos de todos los pares
  * en la recopilación r.*/
@@ -49,11 +49,11 @@ template<typename C, typename V> bool existe (const Recopilacion<C,V> &r, const 
 /* Si en r no existe ningún par con clave k (not existe(r,k)), devuelve la recopilación resultante de añadir en r un par
  * (k,v) ocupando su último puesto. Si en r ya existe un par (k,v1) entonces devuelve la recopilación resultante de
  * sustituir dicho par en r por un par (k,v), conservando el mismo puesto. */
-template<typename C, typename V> void introducir (Recopilacion<C,V> &r,const C &k,const V &v);
+template<typename C, typename V> void introducir (Recopilacion<C,V> &r, const C &k, const V &v);
 
 /* Si en r existe un par (k,v), devuelve su dato v en dato, y en error devuelve false.
  * Parcial: se precisa que existe(r,k); de lo contrario, en error devuelve true. */
-template<typename C, typename V> void obtenerDato (const Recopilacion<C,V> &r,const C &k, V &dato, bool &error);
+template<typename C, typename V> void obtenerDato (const Recopilacion<C,V> &r, const C &k, V &dato, bool &error);
 
 /* Si not existe(r,k), devuelve una recopilación igual a r. Si existe(r,k), devuelve la recopilación resultante de
  * modificar el puesto relativo del par (k,v) entre los pares en r, alejándolo delta posiciones del primer puesto de r
@@ -63,7 +63,7 @@ template<typename C, typename V> void obtenerDato (const Recopilacion<C,V> &r,co
  * destino para el par con clave k, en la recopilación resultante quedará ocupando el puesto siguiente al que tenía en
  * r. Si delta>0, el par que ocupaba en r el puesto destino para el par con clave k, en la recopilación resultante
  * ocupará el puesto anterior al que tenía en r. */
-template<typename C, typename V> void recolocarEnPuesto (Recopilacion<C,V> &r,const C &k, int delta);
+template<typename C, typename V> void recolocarEnPuesto (Recopilacion<C,V> &r, const C &k, int delta);
 
 /* Si 1<=p<=cardinal(r) existe un par en r en el puesto p, entonces devuelve una recopilación igual a la resultante de
  * eliminar de r el par que ocupaba el puesto p, con todos los demás pares iguales a los que hay en r, y en las mismas
@@ -77,7 +77,7 @@ template<typename C, typename V> void obtenerXPuesto (const Recopilacion<C,V> &r
 
 /* Si existe(r,k), devuelve el puesto del par (k,v) en r, en puesto, y en error devuelve false.
  * Parcial: se precisa que existe(r,k); de lo contrario, en error devuelve true. */
-template<typename C, typename V> void puestoDeClave (const Recopilacion<C,V> &r,const C &clave, int &puesto, bool &error);
+template<typename C, typename V> void puestoDeClave (const Recopilacion<C,V> &r, const C &k, int &puesto, bool &error);
 
 /* Inicializa el iterador para recorrer los pares de la recopilación r, de forma que el siguiente par sea el del primer
  * puesto de la recopilación r (situación de no haber visitado ningún par). */
@@ -106,18 +106,19 @@ struct Recopilacion {
     friend void crear<C,V> (Recopilacion<C,V> &r);
     friend int cardinal<C,V> (const Recopilacion &r);
     friend int tamanyoTotal<C,V> (const Recopilacion &r);
-    friend bool existe<C,V> (const Recopilacion &r,const C &k);
-    friend void introducir<C,V> (Recopilacion<C,V> &r,const C &k,const V &v);
-    friend void obtenerDato<C,V> (const Recopilacion<C,V> &r,const C &k, V &dato, bool &error);
-    friend void recolocarEnPuesto<C,V> (Recopilacion<C,V> &r,const C &k, int delta);
+    friend bool existe<C,V> (const Recopilacion &r, const C &k);
+    friend void introducir<C,V> (Recopilacion<C,V> &r, const C &k, const V &v);
+    friend void obtenerDato<C,V> (const Recopilacion<C,V> &r, const C &k, V &dato, bool &error);
+    friend void recolocarEnPuesto<C,V> (Recopilacion<C,V> &r, const C &k, int delta);
     friend void eliminarXPuesto<C,V> (Recopilacion<C,V> &r, int p);
     friend void obtenerXPuesto<C,V> (const Recopilacion<C,V> &r, int p, C &clave, bool &error);
-    friend void puestoDeClave<C,V> (const Recopilacion<C,V> &r,const C &clave, int &puesto, bool &error);
+    friend void puestoDeClave<C,V> (const Recopilacion<C,V> &r, const C &k, int &puesto, bool &error);
     friend void iniciarIterador<C,V> (Recopilacion<C,V> &r);
     friend bool existeSiguiente<C,V> (const Recopilacion<C,V> &r);
     friend void siguienteClave<C,V> (const Recopilacion<C,V> &r, C &clave, bool &error);
     friend void siguienteDato<C,V> (const Recopilacion<C,V> &r, V &dato, bool &error);
     friend void avanza<C,V> (Recopilacion<C,V> &r, bool &error);
+
 private:
     struct Par {
         C clave;
@@ -134,7 +135,7 @@ private:
 
 // Implementación del TAD Recopilación:
 
-/* Inicializa r */
+/* Inicializa r. */
 template<typename C, typename V>
 void crear (Recopilacion<C,V> &r) {
     r.numDatos = 0;
@@ -156,7 +157,7 @@ int tamanyoTotal (const Recopilacion<C,V> &r) {
 
 /* Devuelve true si k pertenece a r; en otro caso devuelve false. */
 template<typename C, typename V>
-bool existe (const Recopilacion<C,V> &r,const C &k) {
+bool existe (const Recopilacion<C,V> &r, const C &k) {
     if (r.tamanyo == 0) {
         // r está vacía
         return false;
@@ -181,7 +182,7 @@ bool existe (const Recopilacion<C,V> &r,const C &k) {
 
 /* Añade el Par (k,v), y, si ya existe, actualiza su dato por v. */
 template<typename C, typename V>
-void introducir (Recopilacion<C,V> &r,const C &k,const V &v) {
+void introducir (Recopilacion<C,V> &r, const C &k, const V &v) {
     typename Recopilacion<C,V>::Par *aux = r.inicial;
     bool encontrado = false;
 
@@ -223,7 +224,7 @@ void introducir (Recopilacion<C,V> &r,const C &k,const V &v) {
 
 /* Si existe el Par (k,v): dato=v y !error; sino: error. */
 template<typename C, typename V>
-void obtenerDato (const Recopilacion<C,V> &r,const C &k, V &dato, bool &error) {
+void obtenerDato (const Recopilacion<C,V> &r, const C &k, V &dato, bool &error) {
     typename Recopilacion<C,V>::Par *aux = r.inicial;
     bool encontrado = false;
 
@@ -248,83 +249,103 @@ void obtenerDato (const Recopilacion<C,V> &r,const C &k, V &dato, bool &error) {
 
 /* Si existe el Par (k,v): mueve su posición relativa delta posiciones y !error; sino: error. */
 template<typename C, typename V>
-void recolocarEnPuesto (Recopilacion<C,V> &r,const C &k, int delta){
-    bool encontrado = false, posibleMovimiento = false;
-    int puestoPar = 1;
-    typename Recopilacion<C,V>::Par *aux = r.inicial;
-    typename Recopilacion<C,V>::Par *tupla;
-    typename Recopilacion<C,V>::Par *aux2;
-    if(aux != nullptr && delta != 0) {
-        if(aux -> clave == k){
-            tupla= r.inicial;
-            aux = nullptr;
-            aux2 = r.inicial -> siguiente;
-            encontrado = true;
-            if( delta > 0 && cardinal(r) > 1){
-                posibleMovimiento = true;
+void recolocarEnPuesto (Recopilacion<C,V> &r, const C &k, int delta) {
+    if (delta != 0) {
+        typename Recopilacion<C,V>::Par *aux = r.inicial;
+        typename Recopilacion<C,V>::Par *aux2 = nullptr;
+        bool encontrado = false;
+        int posPar = 1;
+
+        while (aux != nullptr && !encontrado) {
+            if (aux->clave == k) {
+                // existe un Par con clave k
+                encontrado = true;
+            }
+            else {
+                aux2 = aux;
+                aux = aux->siguiente;
+                posPar++;
             }
         }
-        else{
-            while( aux -> siguiente != nullptr && !encontrado){
-                if( aux -> siguiente -> clave == k){
-                    encontrado = true;
-                    puestoPar++;
+
+        if (encontrado) {
+            // aux = *Par que se desea mover
+            // aux2 = *Par anterior al que se desea mover
+            // posPar = posición del par que se desea mover
+
+            int posDes = posPar + delta;
+            if (posDes > cardinal(r)) {
+                posDes = cardinal(r);
+            }
+            else if (posDes < 1) {
+                posDes = 1;
+            }
+            // posDes = posición destino
+
+            if (posPar != posDes) {
+                // el par se va a mover a una posición distina de la que estaba
+                if (posPar == cardinal(r)) {
+                    // el elemento a mover es el último
+                    r.final = aux2;
                 }
-                else{
-                    aux = aux -> siguiente;
-                    puestoPar ++;
+
+                if (posPar == 1) {
+                    // el elemento a mover es el primero
+                    r.inicial = aux->siguiente;
                 }
-            }
-            tupla= aux -> siguiente;
-            aux2= tupla -> siguiente;
-            if( aux2 == nullptr && delta > 0){
-                posibleMovimiento = false;
-            }
-            else{
-                posibleMovimiento = true;
-            }
-        }
-        if (encontrado && posibleMovimiento){
-            if(tupla == r.inicial){
-                r.inicial= aux2;
-                tupla ->siguiente == nullptr;
-            }
-            else if( r.final == tupla){
-                r.final = aux;
-                aux -> siguiente = nullptr;
-            }
-            else{
-                aux -> siguiente = aux2;
-                tupla -> siguiente =nullptr;
-            }
-            int posicionFinal= puestoPar + delta;
-            if(posicionFinal<=1){
-                tupla -> siguiente= r.inicial;
-                r.inicial = tupla;
-            }
-            else if( posicionFinal >= cardinal(r)){
-                r.final -> siguiente = tupla;
-                r.final = tupla;
-            }
-            else{
-                encontrado=false;
-                int pos=1;
-                typename Recopilacion<C,V>::Par *busqueda= r.inicial;
-                while(!encontrado){
-                    if(pos+1 == posicionFinal){
-                        encontrado = true;
-                        tupla -> siguiente= busqueda -> siguiente;
-                        busqueda -> siguiente = tupla;
+                else {
+                    // el elemento a mover no es el primero
+                    aux2->siguiente = aux->siguiente;
+                }
+
+                if (posDes == cardinal(r)) {
+                    // el destino es el final
+                    r.final->siguiente = aux;
+                    aux->siguiente = nullptr;
+                    r.final = aux;
+                }
+
+                else if (posDes == 1) {
+                    // el destino es el principio
+                    aux->siguiente = r.inicial;
+                    r.inicial = aux;
+                }
+
+                else {
+                    // el destino no es el principio ni el final
+                    encontrado = false;
+                    int posAux;
+                    if (posDes > posPar) {
+                        aux2 = aux2->siguiente; // *Par siguiente al que se desea mover
+                        posAux = posPar + 1;
+                        // se parte desde el par que se desea mover
                     }
-                    else{
-                        pos ++;
-                        busqueda= busqueda -> siguiente;
+                    else {
+                        aux2 = r.inicial;
+                        posAux = 1;
+                        // se parte desde el inicio
                     }
+
+                    // posDes <= cardinal(r)
+                    while (!encontrado) {
+                        if (posAux >= posDes-1) {
+                            encontrado = true;
+                        }
+                        else {
+                            aux2 = aux2->siguiente;
+                            posAux++;
+                        }
+                    }
+                    // aux2 = *Par anterior al destino
+                    // aux = *Par que se desea mover
+
+                    aux->siguiente = aux2->siguiente;
+                    aux2->siguiente = aux;
                 }
             }
         }
     }
-}
+}; // O(2n)
 
 /* Si 1<=p<=cardinal(r): elimina el Par que ocupe la posición p. */
 template<typename C, typename V>
@@ -348,11 +369,14 @@ void eliminarXPuesto (Recopilacion<C,V> &r, int p) {
 
                 r.numDatos--;
                 r.tamanyo -= tamanyo(aux->valor);
-                aux2 -> siguiente = aux->siguiente;
 
                 if (p == 1) {
-                    // el elemento borrado era el primero
-                    r.inicial = aux ->siguiente;
+                    // el elemento a borrar es el primero
+                    r.inicial = aux->siguiente;
+                }
+                else {
+                    // el elemento a borrar no es el primero
+                    aux2->siguiente = aux->siguiente;
                 }
 
                 delete(aux);
@@ -369,44 +393,45 @@ void eliminarXPuesto (Recopilacion<C,V> &r, int p) {
 /* Si 1<=p<=cardinal(r): clave=(clave del Par que ocupa la posición p) y !error; sino: error. */
 template<typename C, typename V>
 void obtenerXPuesto (const Recopilacion<C,V> &r, int p, C &clave, bool &error){
-    if(p<1 || p> cardinal(r)){
-        error =true;
+    if (p < 1 || p > cardinal(r)) {
+        error = true;
     }
-    else{
+    else {
         typename Recopilacion<C,V>::Par *aux = r.inicial;
-        int puesto=1;
-        while(puesto!=p){
-            aux=aux->siguiente;
+        int puesto = 1;
+
+        while (puesto != p) {
+            aux = aux->siguiente;
             puesto++;
-            }
-        clave =aux->clave;
-        error=false;
+        }
+
+        clave = aux->clave;
+        error = false;
     }
-}// O(n)
+}; // O(n)
 
 /* Si existe(r,k): puesto=(puesto del Par con clave k) y !error; sino: error. */
 template<typename C, typename V>
-void puestoDeClave (const Recopilacion<C,V> &r,const C &clave, int &puesto, bool &error){
-    bool encontrado=false;
-    int puestoPar=1;
+void puestoDeClave (const Recopilacion<C,V> &r, const C &k, int &puesto, bool &error){
+    bool encontrado = false;
+    int puestoPar = 1;
     typename Recopilacion<C,V>::Par *aux = r.inicial;
-    while(aux!= nullptr && !encontrado){
-        if(aux->clave==clave){
-            encontrado=true;
-            puesto=puestoPar;
+
+    while (aux != nullptr && !encontrado) {
+        // r no está vacía
+        if (aux->clave == k) {
+            // existe un Par con clave k
+            encontrado = true;
+            puesto = puestoPar;
         }
-        else{
-            aux=aux->siguiente;
+        else {
+            aux = aux->siguiente;
             puestoPar++;
         }
     }
-    if(encontrado){
-        error=false;
-    }
-    else{
-        error=true;
-    }
-}//O(n)
+
+    error = !encontrado;
+}; // O(n)
 
 /* Inicializa el iterador. */
 template<typename C, typename V>
