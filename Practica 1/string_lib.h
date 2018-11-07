@@ -14,6 +14,7 @@
 using namespace std;
 
 
+/* Devuelve la cadena s */
 string to_string (string s);
 
 #endif // STRING_LIB_H
