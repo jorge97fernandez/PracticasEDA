@@ -9,6 +9,11 @@
 #ifndef COLECCIONCONMARCA_H
 #define COLECCIONCONMARCA_H
 
+#include "iostream"
+using namespace std;
+
+#include "pila.h"
+
 
 // Interfaz del TAD colecciónConMarca. Pre-declaraciones:
 
@@ -67,6 +72,8 @@ template<typename C, typename V> void max (typename coleccionConMarca<C,V>::Nodo
 
 template<typename C, typename V> char cambiarMarca_aux (typename coleccionConMarca<C,V>::Nodo *a, const C &c);
 
+template<typename C, typename V> void recorrido (typename coleccionConMarca<C,V>::Nodo *a,Pila<typename coleccionConMarca<C,V>::Nodo *> &iterador);
+
 
 // Declaración:
 
@@ -102,7 +109,7 @@ private:
     int num; // cardinal
     int numMarca; // cardinalConMarca
 
-    Nodo *iterador;
+    Pila<typename coleccionConMarca<C,V>::Nodo*> iterador;
 
     // Funciones auxiliares
     friend char anyadir_aux<C,V> (typename coleccionConMarca<C,V>::Nodo *a, const C &c, const V &v);
@@ -112,6 +119,7 @@ private:
     friend char quitar_aux<C,V> (typename coleccionConMarca<C,V>::Nodo *a, const C &c);
     friend void max<C,V> (typename coleccionConMarca<C,V>::Nodo *a, C &c);
     friend char cambiarMarca_aux<C,V> (typename coleccionConMarca<C,V>::Nodo *a, const C &c);
+    friend void recorrido<C,V> (typename coleccionConMarca<C,V>::Nodo *a,Pila<typename coleccionConMarca<C,V>::Nodo *> &iterador);
 };
 
 
@@ -123,7 +131,7 @@ void crear (coleccionConMarca<C,V> &d) {
     d.raiz = nullptr;
     d.num = 0;
     d.numMarca = 0;
-    d.iterador = nullptr;
+    crear(d.iterador);
 }; // O(1)
 
 /* Si en d no hay ninguna tripleta con clave c, devuelve una colecciónConMarca igual a la
@@ -131,28 +139,30 @@ void crear (coleccionConMarca<C,V> &d) {
  * devuelve una colecciónConMarca igual a la resultante de sustituir (c,v’,b) por (c,v,falso). */
 template<typename C, typename V>
 void anyadir (coleccionConMarca<C,V> &d, const C &c, const V &v) {
-    char anyadido = anyadir_aux(d.raiz, c, v);
-    if (anyadido == 0) {
-        d.num++;
+    if(d.raiz == nullptr){
+        typename coleccionConMarca<C,V>::Nodo *aux = new typename coleccionConMarca<C,V>::Nodo;
+        aux->c = c;
+        aux->v = v;
+        aux->m = false;
+        aux->izq = nullptr;
+        aux->der = nullptr;
+        d.raiz = aux;
+        d.num = 1;
+
     }
-    else if (anyadido == 1) {
-        d.numMarca--;
+    else{
+        char anyadido = anyadir_aux(d.raiz, c, v);
+        if (anyadido == 0) {
+            d.num++;
+        }
+        else if (anyadido == 1) {
+            d.numMarca--;
+        }
     }
 };
 
 template<typename C, typename V>
 char anyadir_aux (typename coleccionConMarca<C,V>::Nodo *a, const C &c, const V &v) {
-    if (a == nullptr) {
-        // Se añade un nodo nuevo ya que no existe un nodo con clave c
-        a = new typename coleccionConMarca<C,V>::Nodo;
-        a->c = c;
-        a->v = v;
-        a->m = false;
-        a->izq = nullptr;
-        a->der = nullptr;
-        return 0;
-    }
-    else {
         if (c == a->c) {
             // Ya existe un nodo con clave c
             a->v = v;
@@ -166,13 +176,35 @@ char anyadir_aux (typename coleccionConMarca<C,V>::Nodo *a, const C &c, const V 
                 return 2;
             }
         }
-        else if (c < a->c) {
+        else if (c < a->c && a->izq != nullptr) {
             anyadir_aux(a->izq, c, v);
         }
-        else {
-            anyadir_aux(a->der, c, v);
+        else if (c < a->c && a->izq == nullptr) {
+            typename coleccionConMarca<C,V>::Nodo *aux = new typename coleccionConMarca<C,V>::Nodo;
+            aux->c = c;
+            aux->v = v;
+            aux->m = false;
+            aux->izq = nullptr;
+            aux->der = nullptr;
+            a->izq = aux;
+            return 0;
         }
-    }
+        else {
+            if(a->der != nullptr) {
+                anyadir_aux(a->der, c, v);
+            }
+            else{
+                    cout << "debia entrar aqui" <<endl;
+                    typename coleccionConMarca<C,V>::Nodo *aux = new typename coleccionConMarca<C,V>::Nodo;;
+                    aux->c = c;
+                    aux->v = v;
+                    aux->m = false;
+                    aux->izq = nullptr;
+                    aux->der = nullptr;
+                    a->der = aux;
+                    return 0;
+            }
+        }
 };
 
 template<typename C, typename V>
@@ -367,34 +399,78 @@ bool esVacio (const coleccionConMarca<C,V> &d) {
     return d.num == 0;
 };
 
+template<typename C, typename V> void recorrido (typename coleccionConMarca<C,V>::Nodo *a,Pila<typename coleccionConMarca<C,V>::Nodo* > &iterador){
+    if(a->izq != nullptr){
+        recorrido<C,V>(a->izq,iterador);
+    }
+    cout << "Me introduzco" << endl;
+    introducir(iterador,a);
+    if(a->der != nullptr){
+        recorrido<C,V>(a->der,iterador);
+    }
+}
+
 template<typename C, typename V>
 void iniciarIterador (coleccionConMarca<C,V> &d) {
-
+    crear(d.iterador);
+    /*cout << d.raiz->c << endl;
+    introducir(d.iterador,d.raiz);
+    iniciarIterador(d.iterador);*/
+    if(!esVacio<C,V>(d)){
+        recorrido<C,V>(d.raiz,d.iterador);
+        iniciarIterador(d.iterador);
+    }
 };
 
 template<typename C, typename V>
 bool existeSiguiente (const coleccionConMarca<C,V> &d) {
-    return d.iterador != nullptr;
+    return existeSiguiente(d.iterador);
 };
 
 template<typename C, typename V>
 void siguienteClave (const coleccionConMarca<C,V> &d, C &c, bool &error) {
-
+    if(existeSiguiente(d)){
+        typename coleccionConMarca<C,V>::Nodo* aux= new typename coleccionConMarca<C,V>::Nodo;
+        bool error;
+        error= siguienteDato(d.iterador,aux);
+        c = aux->c;
+        error = false;
+    }
+    else{
+        error=true;
+    }
 };
 
 template<typename C, typename V>
 void siguienteValor (const coleccionConMarca<C,V> &d, V &v, bool &error) {
-
+    if(existeSiguiente(d)){
+        typename coleccionConMarca<C,V>::Nodo *aux;
+        siguienteDato(d.iterador,aux);
+        v = aux->v;
+        error = false;
+    }
+    error = true;
 };
 
 template<typename C, typename V>
 bool siguienteMarca (const coleccionConMarca<C,V> &d, bool &error) {
-
+    if(existeSiguiente(d)){
+        typename coleccionConMarca<C,V>::Nodo *aux;
+        siguienteDato(d.iterador,aux);
+        error = false;
+        return aux->m;
+    }
+    error=true;
+    return false;
 };
 
 template<typename C, typename V>
 void avanza (coleccionConMarca<C,V> &d, bool &error) {
-
+    if(existeSiguiente(d)){
+        avanza(d.iterador);
+        error=false;
+    }
+    error=true;
 };
 
 #endif // fin de coleccionConMarca.h
