@@ -9,7 +9,7 @@
 #ifndef COLECCIONCONMARCA_H
 #define COLECCIONCONMARCA_H
 
-#include "iostream"
+#include <iostream>
 using namespace std;
 
 #include "pila.h"
@@ -17,32 +17,49 @@ using namespace std;
 
 // Interfaz del TAD colecciónConMarca. Pre-declaraciones:
 
-/* Los valores del TAD representan ... TODO
+/* Los valores del TAD representan conjuntos de tripletas (clave, valor, booleano) en los que no se permiten claves
+ * repetidas, y que cuentan con las operaciones de un iterador que permite recorrer los datos de la colecciónConMarca
+ * según el orden por clave, de menor a mayor. El valor booleano de cada tripleta diremos que es la marca asociada a
+ * la clave.
  *
  * El TAD que se use para la clave, debe tener definidas las siguientes operaciones:
- *    bool operator< (clave c1, clave c2) {Devuelve verdad si y sólo si c1 es menor que c2}
- */
+ *    bool operator< (clave c1, clave c2) {Devuelve verdad si y sólo si c1 es menor que c2} */
 template<typename C, typename V> struct coleccionConMarca;
 
 /* Devuelve una colecciónConMarca vacía, sin elementos (tripletas). */
 template<typename C, typename V> void crear (coleccionConMarca<C,V> &d);
 
+/* Si en d no hay ninguna tripleta con clave c, devuelve una colecciónConMarca igual a la resultante de añadir la
+ * tripleta (c,v,falso) a d; si en d hay una tripleta (c,v’,b), entonces devuelve una colecciónConMarca igual a la
+ * resultante de sustituir (c,v’,b) por (c,v,falso). */
 template<typename C, typename V> void anyadir (coleccionConMarca<C,V> &d, const C &c, const V &v);
 
+/* Devuelve verdad si y sólo si en d hay alguna tripleta (c,v,b). */
 template<typename C, typename V> bool pertenece (const coleccionConMarca<C,V> &d, const C &c);
 
+/* Devuelve el valor asociado a la clave c en d, y en error devuelve false.
+ * Parcial: se precisa que pertenece(d, c); de lo contrario en error devuelve true. */
 template<typename C, typename V> void obtenerValor (const coleccionConMarca<C,V> &d, const C &c, V &v, bool &error);
 
+/* Devuelve la marca asociada a la clave c en d, y en error devuelve false.
+ * Parcial: se precisa que pertenece(d, c); de lo contrario en error devuelve true. */
 template<typename C, typename V> bool obtenerMarca (const coleccionConMarca<C,V> &d, const C &c, bool &error);
 
+/* Si c está en d, devuelve una colecciónConMarca igual a la resultante de borrar en d la tripleta con clave c; si c no
+ * está en d, devuelve una colecciónConMarca igual a d. */
 template<typename C, typename V> void quitar (coleccionConMarca<C,V> &d, const C &c);
 
+/* Devuelve el número de elementos (tripletas) en la colecciónConMarca d. */
 template<typename C, typename V> int cardinal (const coleccionConMarca<C,V> &d);
 
+/* Devuelve el número de elementos (tripletas) en la colecciónConMarca d cuya marca es igual a verdad. */
 template<typename C, typename V> int cardinalConMarca (const coleccionConMarca<C,V> &d);
 
+/* Si pertenece?(d,c), existe una tripleta (c,v,m) en la colecciónConMarca d, y devuelve la colecciónConMarca resultante
+ * de sustituir (c,v,m) por (c,v,(not m)). Si not pertenece?(d,c), devuelve una colecciónConMarca igual a d. */
 template<typename C, typename V> void cambiarMarca (coleccionConMarca<C,V> &d, const C &c);
 
+/* Devuelve verdad si y sólo si d no tiene elementos. */
 template<typename C, typename V> bool esVacio (const coleccionConMarca<C,V> &d);
 
 template<typename C, typename V> void iniciarIterador (coleccionConMarca<C,V> &d);
