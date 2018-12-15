@@ -11,7 +11,7 @@
 using namespace std;
 
 
-// Implementación del TAD colecciónConMarca:
+// Implementación del TAD repertorio:
 
 /* Devuelve un repertorio vacío (sin canciones), y título tit. */
 void crear (repertorio &r, const string &tit) {
@@ -91,6 +91,26 @@ int totalCancionesEscuchadas (const repertorio &r) {
  *
  * - la información de todas las canciones escuchadas del repertorio con el mismo formato que el indicado para las
  * canciones no escuchadas. */
-string listarRepertorio (const repertorio &r) {
+string listarRepertorio (repertorio &r) {
+    bool error;
+    string clave;
+    Cancion valor;
+    string resul = "CANCIONES NO ESCUCHADAS: " + to_string(cardinal(r.c) - cardinalConMarca(r.c)) + "\n";
+    string escuchadas = "";
 
-}
+    iniciarIterador(r.c);
+    while (existeSiguiente(r.c)) {
+        siguienteClave(r.c, clave, error);
+        siguienteValor(r.c, valor, error);
+        if (!siguienteMarca(r.c, error)) {
+            resul += clave + ":::<* " + to_string(valor) + "*>\n";
+        }
+        else {
+            escuchadas += clave + ":::<* " + to_string(valor) + "*>\n";
+        }
+        avanza(r.c, error);
+    }
+
+    resul += "CANCIONES ESCUCHADAS: " + to_string(cardinalConMarca(r.c)) + "\n" + escuchadas;
+    return resul;
+};

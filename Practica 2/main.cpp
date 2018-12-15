@@ -1,5 +1,5 @@
 #include <iostream>
-#include "coleccionConMarca.h"
+#include "repertorio.h"
 
 using namespace std;
 
@@ -122,9 +122,27 @@ void pruebas3() {
     }
 }
 
+void pruebas4() {
+    repertorio r;
+    crear(r, "repo");
+    Cancion valor[5];
+    string clave[5];
+    for (int i = 0; i < 5; ++i) {
+        clave[i] = to_string(i);
+        valor[i] = crear(clave[i], to_string(i*5), i*2, i);
+        anyadir(r, clave[i], valor[i]);
+    }
+    modificarEscuchada(r, clave[1], true);
+    cout << listarRepertorio(r);
+}
+
 int main() {
+    // Pruebas coleccion
     //pruebas1();
-    pruebas2();
+    //pruebas2();
     //pruebas3();
+
+    // Pruebas repertorio
+    pruebas4();
     return 0;
 }

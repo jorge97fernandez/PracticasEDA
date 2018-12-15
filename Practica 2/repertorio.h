@@ -12,10 +12,9 @@
 #include <string>
 #include "coleccionConMarca.h"
 #include "cancion.h"
-#include "string_lib.h"
 
 
-// Interfaz del TAD Pila. Pre-declaraciones:
+// Interfaz del TAD repertorio. Pre-declaraciones:
 
 /* Los valores del TAD representan un repertorio de canciones con las siguientes características: una cadena de
  * caracteres para representar el título del repertorio, y un conjunto de canciones, cada una de ellas identificada por
@@ -75,7 +74,7 @@ int totalCancionesEscuchadas (const repertorio &r);
  *
  * - la información de todas las canciones escuchadas del repertorio con el mismo formato que el indicado para las
  * canciones no escuchadas. */
-std::string listarRepertorio (const repertorio &r);
+std::string listarRepertorio (repertorio &r);
 
 
 // Declaración:
@@ -91,7 +90,7 @@ struct repertorio {
     friend void quitarCancion (repertorio &r, const std::string &k);
     friend int totalCanciones (const repertorio &r);
     friend int totalCancionesEscuchadas (const repertorio &r);
-    friend std::string listarRepertorio (const repertorio &r);
+    friend std::string listarRepertorio (repertorio &r);
 
 private:
     std::string tit; // Título
