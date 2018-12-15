@@ -9,6 +9,7 @@
 #ifndef PILA_H
 #define PILA_H
 
+
 // Interfaz del TAD Pila. Pre-declaraciones:
 
 /* Los valores del TAD representan valores ordenados siguiendo el estándar LIFO (último en entrar, primero en salir),
@@ -34,6 +35,9 @@ template<typename T> void cima (const Pila<T> &l, T &valor, bool &error);
 /* Devuelve verdad si y sólo si l no tiene elementos. */
 template<typename T> bool esVacio (const Pila<T> &l);
 
+
+// Declaración:
+
 template<typename T>
 struct Pila {
     friend void crear<T>  (Pila<T> &l);
@@ -50,6 +54,9 @@ private:
     Nodo *dato; // Elemento en la cima
     int numDatos; // Número de elementos de la pila
 };
+
+
+// Implementación del TAD colecciónConMarca:
 
 /* Devuelve una pila vacía, sin elementos. */
 template<typename T>
