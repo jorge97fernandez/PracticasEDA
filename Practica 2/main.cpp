@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int main() {
+void pruebas1() {
     coleccionConMarca<int,int> c;
     crear(c);
     int i1=5,j1=2;
@@ -38,5 +38,93 @@ int main() {
         cout << sig << endl;
         avanza(c,error);
     }
+}
+
+void pruebas2() {
+    coleccionConMarca<int,int> c;
+    crear(c);
+    bool r = esVacio(c);
+
+    int claves[10];
+    int valores[10];
+    for (int i = 0; i < 10; ++i) {
+        claves[i] = i;
+        valores[i] = i*5;
+        anyadir(c, claves[i], valores[i]);
+    }
+
+    anyadir(c, claves[0], valores[1]);
+    anyadir(c, claves[9], valores[1]);
+    quitar(c, claves[0]);
+    quitar(c, claves[9]);
+    anyadir(c, claves[0], valores[0]);
+    quitar(c, claves[1]);
+    anyadir(c, claves[1], valores[1]);
+    cambiarMarca(c, claves[0]);
+    r = esVacio(c);
+    int s = cardinal(c);
+    s = cardinalConMarca(c);
+    r = pertenece(c, claves[0]);
+    r = pertenece(c, claves[9]);
+    obtenerValor(c, claves[0], s, r);
+    obtenerValor(c, claves[9], s, r);
+    bool m = obtenerMarca(c, claves[0], r);
+    m = obtenerMarca(c, claves[9], r);
+    m = obtenerMarca(c, claves[1], r);
+    quitar(c, claves[0]);
+    anyadir(c, claves[0], valores[1]);
+    m = obtenerMarca(c, claves[0], r);
+
+    quitar(c, claves[3]);
+    anyadir(c, claves[3], valores[3]);
+    quitar(c, claves[4]);
+    anyadir(c, claves[4], valores[4]);
+    quitar(c, claves[3]);
+    anyadir(c, claves[3], valores[3]);
+    quitar(c, claves[5]);
+    anyadir(c, claves[5], valores[5]);
+
+    // Iterador:
+    m = existeSiguiente(c);
+    iniciarIterador(c);
+    avanza(c, r);
+    iniciarIterador(c);
+    m = existeSiguiente(c);
+    siguienteClave(c, s, r);
+    m = siguienteMarca(c, r);
+    siguienteValor(c, s, r);
+
+    while (existeSiguiente(c)) {
+        avanza(c, r);
+    }
+    avanza(c, r);
+}
+
+void pruebas3() {
+    Pila<int> p;
+    crear(p);
+    bool b = esVacio(p);
+    int c = 5555;
+    cima(p, c, b);
+    desapilar(p, b);
+
+    for (int i = 0; i < 10; ++i) {
+        apilar(p, i);
+    }
+
+    cima(p, c, b);
+    b = esVacio(p);
+    desapilar(p, b);
+    cima(p, c, b);
+
+    for (int i = 0; i < 9; ++i) {
+        desapilar(p, b);
+    }
+}
+
+int main() {
+    //pruebas1();
+    pruebas2();
+    //pruebas3();
     return 0;
 }
