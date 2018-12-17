@@ -1,0 +1,39 @@
+eliminacion de cancion INNECESARIA: C1
+cancion DESCONOCIDA: C1
+cambio IMPOSIBLE: C1
+TITULO: Mi repertorio de canciones
+NUMERO de canciones: 0
+CANCIONES NO ESCUCHADAS: 0
+CANCIONES ESCUCHADAS: 0
+INSERCION: A:::<* Khazad --- Shore --- 2009 ( 780 )*> NO escuchada
+INSERCION: C:::<* Lulu --- Shin --- 2019 ( 781 )*> NO escuchada
+INSERCION: D:::<* Dedo --- Indice --- 2029 ( 782 )*> NO escuchada
+INSERCION: F:::<* Khadfefezad --- Shop --- 2109 ( 720 )*> NO escuchada
+cancion ELIMINADA: A:::<* Khazad --- Shore --- 2009 ( 780 )*> NO escuchada
+INSERCION: B:::<* Ash --- Ketchum --- 3009 ( 180 )*> NO escuchada
+INSERCION: A:::<* Khazad --- Shore --- 2009 ( 780 )*> NO escuchada
+INSERCION: E:::<* Pepito --- Grillo --- 1009 ( 110 )*> NO escuchada
+cancion ELIMINADA: D:::<* Dedo --- Indice --- 2029 ( 782 )*> NO escuchada
+INSERCION: D:::<* Dedo --- Indice --- 2029 ( 782 )*> NO escuchada
+TITULO: Mi repertorio de canciones
+NUMERO de canciones: 6
+CANCIONES NO ESCUCHADAS: 6
+A:::<* Khazad --- Shore --- 2009 ( 780 )*>
+B:::<* Ash --- Ketchum --- 3009 ( 180 )*>
+C:::<* Lulu --- Shin --- 2019 ( 781 )*>
+D:::<* Dedo --- Indice --- 2029 ( 782 )*>
+E:::<* Pepito --- Grillo --- 1009 ( 110 )*>
+F:::<* Khadfefezad --- Shop --- 2109 ( 720 )*>
+CANCIONES ESCUCHADAS: 0
+cambio ESCUCHADA: A:::<* Khazad --- Shore --- 2009 ( 780 )*> escuchada
+ENCONTRADA: D:::<* Dedo --- Indice --- 2029 ( 782 )*> NO escuchada
+TITULO: Mi repertorio de canciones
+NUMERO de canciones: 6
+CANCIONES NO ESCUCHADAS: 5
+B:::<* Ash --- Ketchum --- 3009 ( 180 )*>
+C:::<* Lulu --- Shin --- 2019 ( 781 )*>
+D:::<* Dedo --- Indice --- 2029 ( 782 )*>
+E:::<* Pepito --- Grillo --- 1009 ( 110 )*>
+F:::<* Khadfefezad --- Shop --- 2109 ( 720 )*>
+CANCIONES ESCUCHADAS: 1
+A:::<* Khazad --- Shore --- 2009 ( 780 )*>
