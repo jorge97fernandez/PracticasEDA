@@ -7,6 +7,7 @@
 //**********************************************************************************************************************
 
 #include "repertorio.h"
+#include <string>
 #include <iostream>
 #include <fstream>
 
@@ -15,7 +16,9 @@ using namespace std;
 
 // Añadir una Canción al repertorio
 void ordenac (repertorio &a, ifstream &f, ofstream &s) {
+    cout << "Entro en AC" << endl;
     string clave, nombre, autor, anyo, segundos;
+    bool error = false;
     getline(f,clave);
     getline(f,nombre);
     getline(f,autor);
@@ -40,11 +43,18 @@ void ordenac (repertorio &a, ifstream &f, ofstream &s) {
 
     Cancion c = crear(nombre, autor, anyo_cancion, segundos_cancion);
     anyadir(a, clave, c);
-    s << clave << ":::<* " << to_string(c) << "*>" << endl;
+    s << clave << ":::<* " << to_string(c) << "*>";
+    if(escuchada(a,clave,error)){
+        s << "escuchada" << endl;
+    }
+    else{
+        s << "NO escuchada" << endl;
+    }
 }
 
 // Obtener los datos de una Canción
 void ordenoc (repertorio &a, ifstream &f, ofstream &s) {
+    cout << "Yeee" << endl;
     string clave;
     getline(f,clave);
 
@@ -56,7 +66,13 @@ void ordenoc (repertorio &a, ifstream &f, ofstream &s) {
         bool error;
         Cancion c;
         obtenerCancion(a, clave, c, error);
-        s << clave << ":::<* " << to_string(c) << "*>" << endl;
+        s << clave << ":::<* " << to_string(c) << "*>";
+        if(escuchada(a,clave,error)){
+            s << "escuchada" << endl;
+        }
+        else{
+            s << "NO escuchada" << endl;
+        }
     }
     else {
         s <<"cancion DESCONOCIDA: " << clave << endl;
@@ -65,96 +81,89 @@ void ordenoc (repertorio &a, ifstream &f, ofstream &s) {
 
 // Eliminar una canción
 void ordenec (repertorio &a, ifstream &f, ofstream &s) {
-    string pista;
-    getline(f, pista);
-    int pista_cancion = stoi(pista, nullptr, 10);
     string clave;
-    bool error;
-    canciondePuesto(a, pista_cancion, clave, error);
+    getline(f,clave);
 
-    if (error) {
-        s << "eliminacion de cancion INNECESARIA: " << to_string(pista_cancion) << endl;
+    unsigned long lng = clave.size();
+    if (clave[lng-1] == '\r') clave.erase(lng-1, 1);
+    bool error;
+
+    if (!existeCancion(a, clave)) {
+        s << "eliminacion de cancion INNECESARIA: " <<clave << endl;
     }
     else {
-        s << "cancion ELIMINADA: " << to_string(pista_cancion) << " ... ";
+        s << "cancion ELIMINADA: ";
         Cancion c;
         obtenerCancion(a, clave, c, error);
-        s << clave << ":::<* " << to_string(c) << "*>" << endl;
-        eliminarCancion(a, pista_cancion);
+        s << clave << ":::<* " << to_string(c) << "*>";
+        if(escuchada(a,clave,error)){
+            s << "escuchada" << endl;
+        }
+        else{
+            s << "NO escuchada" << endl;
+        }
+        quitarCancion(a, clave);
     }
 }
 
-void ordenlp (albumCanciones &a, ifstream &f, ofstream &s) {
-    string pista;
-    getline(f, pista);
-    int pista_cancion = stoi(pista, nullptr, 10);
-    string clave;
+void ordenmes (repertorio &a, ifstream &f, ofstream &s) {
+    string clave,num_canc;
+    getline(f, clave);
+    getline(f,num_canc);
+    unsigned long lng = clave.size();
+    if (clave[lng-1] == '\r') clave.erase(lng-1, 1);
+    int numero = stoi(num_canc, nullptr, 10);
     bool error;
-    canciondePuesto(a, pista_cancion, clave, error);
 
-    if (error) {
-        s << "pista INEXISTENTE: " << to_string(pista_cancion) << endl;
-    }
-    else {
-        s << "PISTA: " << to_string(pista_cancion) << " ... ";
+    if (existeCancion(a, clave)) {
         Cancion c;
         obtenerCancion(a, clave, c, error);
-        s << clave << ":::<* " << to_string(c) << "*>" << endl;
-    }
-}
-
-void ordenoa (albumCanciones &a, ifstream &f, ofstream &s) {
-    string clave1, clave2;
-    getline(f, clave1);
-    getline(f, clave2);
-
-    unsigned long lng = clave1.size();
-    if (clave1[lng-1] == '\r') clave1.erase(lng-1, 1);
-
-    lng = clave2.size();
-    if (clave2[lng-1]=='\r') clave2.erase(lng-1, 1);
-
-    if (existeCancion(a, clave1) && existeCancion(a, clave2)) {
-        int pista1, pista2;
-        bool error;
-        Cancion primera, segunda;
-
-        puestodeCancion(a, clave1, pista1, error);
-        puestodeCancion(a, clave2, pista2, error);
-        obtenerCancion(a, clave1, primera, error);
-        obtenerCancion(a, clave2, segunda, error);
-
-        s << "INTERCAMBIAR:" << endl;
-        s << "pista A) " << to_string(pista1) << " ... " << clave1 << ":::<* " << to_string(primera)
-          << "*>" << endl;
-        s << "pista B) " << to_string(pista2) << " ... " << clave2 << ":::<* " << to_string(segunda)
-          << "*>" << endl;
-
-        intercambiarCanciones(a,clave1,clave2);
+        if(escuchada(a,clave,error) == numero){
+            s << "ESCUCHADA INNECESARIO: ";
+        }
+        else {
+            s << "cambio ESCUCHADA: ";
+            modificarEscuchada(a,clave,numero);
+        }
+        s << clave << ":::<* " << to_string(c) << "*>";
+        if(escuchada(a,clave,error)){
+            s << "escuchada" << endl;
+        }
+        else{
+            s << "NO escuchada" << endl;
+        }
     }
     else {
-        s << "intercambio IMPOSIBLE: " << clave1 << " ### " << clave2 << endl;
+        s << "cambio IMPOSIBLE: " << clave << endl;
     }
-
 }
 
-void ordenla (albumCanciones &a, ifstream &f, ofstream &s) {
-    s << "TITULO: " << to_string(tituloDeAlbum(a)) << endl;
-    s << "DURACION TOTAL: " << to_string(duracion(a)) << endl;
-    s << "NUMERO de canciones: " << to_string(numCanciones(a)) << endl;
-    s << listarAlbum(a);
+
+
+void ordenlr (repertorio &a, ifstream &f, ofstream &s) {
+    s << "TITULO: " << to_string(tituloRepertorio(a)) << endl;
+    s << "NUMERO de canciones: " << to_string(totalCanciones(a)) << endl;
+    s << listarRepertorio(a);
 }
 
-void ejecutarOrden (const string &orden, repertorio &a, ifstream &f, ofstream &s) {
-    if (orden == "AC") ordenac(a, f, s); // Añadir una Canción al repertorio
+void ejecutarOrden (string &orden, repertorio &a, ifstream &f, ofstream &s) {
+    cout << " Voy a ejecutar orden" << endl;
+    int lng=orden.size();
+    if(orden[lng-1]=='\r'){
+        orden.erase(lng-1,1);
+    }
+    if (orden.compare("AC")==0) ordenac(a, f, s); // Añadir una Canción al repertorio
 
-    else if (orden == "OC") ordenoc(a, f, s); // Obtener los datos de una Canción
+    else if (orden.compare("OC")==0) ordenoc(a, f, s); // Obtener los datos de una Canción
 
-    else if (orden == "EC") ordenec(a, f, s); // Eliminar una canción //TODO: terminar
+    else if (orden.compare("EC")==0) ordenec(a, f, s); // Eliminar una canción //TODO: terminar
 
-    else if (orden == "MES") ordenmes(a, f, s); // Modificar Escuchada
+    else if (orden.compare("MES")==0) ordenmes(a, f, s); // Modificar Escuchada
 
-    else if (orden == "LR") ordenlr(a, f, s); // Listar todas las canciones del repertorio
+    else if (orden.compare("LR")==0) ordenlr(a, f, s); // Listar todas las canciones del repertorio
+    else {
+        cout << "No ejecuto orden" << endl;
+    }
 }
 
 int main () {

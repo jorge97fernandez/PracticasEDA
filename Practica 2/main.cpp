@@ -1,148 +1,187 @@
-#include <iostream>
+//**********************************************************************************************************************
+// Archivo: practica2.cpp
+// Autor:   Andrés Gavín Murillo 716358
+// Autor:   Jorge Fernandez Muñoz 721529
+// Fecha:   Diciembre 2018
+// Coms:    EDA - Práctica 2 - Main
+//**********************************************************************************************************************
+
 #include "repertorio.h"
+#include <string>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
-void pruebas1() {
-    coleccionConMarca<int,int> c;
-    crear(c);
-    int i1=5,j1=2;
-    int i2=8,j2=2;
-    int i3=3,j3=2;
-    int i4=9,j4=2;
-    int i5=4,j5=2;
-    int i6=7,j6=2;
-    int i7=6,j7=2;
-    int i8=10,j8=2;
-    int i9=2,j9=2;
-    int i10=1,j10=2;
-    cout << "true" <<endl;
-    anyadir(c,i1,j1);
-    cout << "doble true" <<endl;
-    anyadir(c,i2,j2);
-    anyadir(c,i3,j3);
-    anyadir(c,i4,j4);
-    anyadir(c,i5,j5);
-    anyadir(c,i6,j6);
-    anyadir(c,i7,j7);
-    anyadir(c,i8,j8);
-    anyadir(c,i9,j9);
-    anyadir(c,i10,j10);
-    cout << cardinal(c) << endl;
-    cout <<boolalpha << esVacio(c) << endl;
-    iniciarIterador(c);
-    while(existeSiguiente(c)){
-        int sig;
+
+// Añadir una Canción al repertorio
+void ordenac (repertorio &a, ifstream &f, ofstream &s) {
+    cout << "Entro en AC" << endl;
+    string clave, nombre, autor, anyo, segundos;
+    bool error = false;
+    getline(f,clave);
+    getline(f,nombre);
+    getline(f,autor);
+    getline(f,anyo);
+    getline(f,segundos);
+
+    unsigned long lng = clave.size();
+    if (clave[lng-1] == '\r') clave.erase(lng-1, 1);
+
+    lng = nombre.size();
+    if (nombre[lng-1] == '\r') nombre.erase(lng-1, 1);
+
+    lng = autor.size();
+    if (autor[lng-1] == '\r') autor.erase(lng-1, 1);
+
+    int anyo_cancion = stoi(anyo, nullptr, 10);
+    int segundos_cancion = stoi(segundos, nullptr, 10);
+
+    if (existeCancion(a, clave)) s << "ACTUALIZACION: ";
+
+    else s << "INSERCION: ";
+
+    Cancion c = crear(nombre, autor, anyo_cancion, segundos_cancion);
+    anyadir(a, clave, c);
+    s << clave << ":::<* " << to_string(c) << "*>";
+    if(escuchada(a,clave,error)){
+        s << "escuchada" << endl;
+    }
+    else{
+        s << "NO escuchada" << endl;
+    }
+}
+
+// Obtener los datos de una Canción
+void ordenoc (repertorio &a, ifstream &f, ofstream &s) {
+    cout << "Yeee" << endl;
+    string clave;
+    getline(f,clave);
+
+    unsigned long lng = clave.size();
+    if (clave[lng-1] == '\r') clave.erase(lng-1, 1);
+
+    if (existeCancion(a, clave)) {
+        s << "ENCONTRADA: ";
         bool error;
-        siguienteClave(c,sig,error);
-        cout << sig << endl;
-        avanza(c,error);
+        Cancion c;
+        obtenerCancion(a, clave, c, error);
+        s << clave << ":::<* " << to_string(c) << "*>";
+        if(escuchada(a,clave,error)){
+            s << "escuchada" << endl;
+        }
+        else{
+            s << "NO escuchada" << endl;
+        }
+    }
+    else {
+        s <<"cancion DESCONOCIDA: " << clave << endl;
     }
 }
 
-void pruebas2() {
-    coleccionConMarca<int,int> c;
-    crear(c);
-    bool r = esVacio(c);
+// Eliminar una canción
+void ordenec (repertorio &a, ifstream &f, ofstream &s) {
+    string clave;
+    getline(f,clave);
 
-    int claves[10];
-    int valores[10];
-    for (int i = 0; i < 10; ++i) {
-        claves[i] = i;
-        valores[i] = i*5;
-        anyadir(c, claves[i], valores[i]);
+    unsigned long lng = clave.size();
+    if (clave[lng-1] == '\r') clave.erase(lng-1, 1);
+    bool error;
+
+    if (!existeCancion(a, clave)) {
+        s << "eliminacion de cancion INNECESARIA: " <<clave << endl;
     }
-
-    anyadir(c, claves[0], valores[1]);
-    anyadir(c, claves[9], valores[1]);
-    quitar(c, claves[0]);
-    quitar(c, claves[9]);
-    anyadir(c, claves[0], valores[0]);
-    quitar(c, claves[1]);
-    anyadir(c, claves[1], valores[1]);
-    cambiarMarca(c, claves[0]);
-    r = esVacio(c);
-    int s = cardinal(c);
-    s = cardinalConMarca(c);
-    r = pertenece(c, claves[0]);
-    r = pertenece(c, claves[9]);
-    obtenerValor(c, claves[0], s, r);
-    obtenerValor(c, claves[9], s, r);
-    bool m = obtenerMarca(c, claves[0], r);
-    m = obtenerMarca(c, claves[9], r);
-    m = obtenerMarca(c, claves[1], r);
-    quitar(c, claves[0]);
-    anyadir(c, claves[0], valores[1]);
-    m = obtenerMarca(c, claves[0], r);
-
-    quitar(c, claves[3]);
-    anyadir(c, claves[3], valores[3]);
-    quitar(c, claves[4]);
-    anyadir(c, claves[4], valores[4]);
-    quitar(c, claves[3]);
-    anyadir(c, claves[3], valores[3]);
-    quitar(c, claves[5]);
-    anyadir(c, claves[5], valores[5]);
-
-    // Iterador:
-    m = existeSiguiente(c);
-    iniciarIterador(c);
-    avanza(c, r);
-    iniciarIterador(c);
-    m = existeSiguiente(c);
-    siguienteClave(c, s, r);
-    m = siguienteMarca(c, r);
-    siguienteValor(c, s, r);
-
-    while (existeSiguiente(c)) {
-        avanza(c, r);
-    }
-    avanza(c, r);
-}
-
-void pruebas3() {
-    Pila<int> p;
-    crear(p);
-    bool b = esVacio(p);
-    int c = 5555;
-    cima(p, c, b);
-    desapilar(p, b);
-
-    for (int i = 0; i < 10; ++i) {
-        apilar(p, i);
-    }
-
-    cima(p, c, b);
-    b = esVacio(p);
-    desapilar(p, b);
-    cima(p, c, b);
-
-    for (int i = 0; i < 9; ++i) {
-        desapilar(p, b);
+    else {
+        s << "cancion ELIMINADA: ";
+        Cancion c;
+        obtenerCancion(a, clave, c, error);
+        s << clave << ":::<* " << to_string(c) << "*>";
+        if(escuchada(a,clave,error)){
+            s << "escuchada" << endl;
+        }
+        else{
+            s << "NO escuchada" << endl;
+        }
+        quitarCancion(a, clave);
     }
 }
 
-void pruebas4() {
-    repertorio r;
-    crear(r, "repo");
-    Cancion valor[5];
-    string clave[5];
-    for (int i = 0; i < 5; ++i) {
-        clave[i] = to_string(i);
-        valor[i] = crear(clave[i], to_string(i*5), i*2, i);
-        anyadir(r, clave[i], valor[i]);
+void ordenmes (repertorio &a, ifstream &f, ofstream &s) {
+    string clave,num_canc;
+    getline(f, clave);
+    getline(f,num_canc);
+    unsigned long lng = clave.size();
+    if (clave[lng-1] == '\r') clave.erase(lng-1, 1);
+    int numero = stoi(num_canc, nullptr, 10);
+    bool error;
+
+    if (existeCancion(a, clave)) {
+        Cancion c;
+        obtenerCancion(a, clave, c, error);
+        if(escuchada(a,clave,error) == numero){
+            s << "ESCUCHADA INNECESARIO: ";
+        }
+        else {
+            s << "cambio ESCUCHADA: ";
+            modificarEscuchada(a,clave,numero);
+        }
+        s << clave << ":::<* " << to_string(c) << "*>";
+        if(escuchada(a,clave,error)){
+            s << "escuchada" << endl;
+        }
+        else{
+            s << "NO escuchada" << endl;
+        }
     }
-    modificarEscuchada(r, clave[1], true);
-    cout << listarRepertorio(r);
+    else {
+        s << "cambio IMPOSIBLE: " << clave << endl;
+    }
 }
 
-int main() {
-    // Pruebas coleccion
-    //pruebas1();
-    //pruebas2();
-    //pruebas3();
 
-    // Pruebas repertorio
-    pruebas4();
+
+void ordenlr (repertorio &a, ifstream &f, ofstream &s) {
+    s << "TITULO: " << to_string(tituloRepertorio(a)) << endl;
+    s << "NUMERO de canciones: " << to_string(totalCanciones(a)) << endl;
+    s << listarRepertorio(a);
+}
+
+void ejecutarOrden (string &orden, repertorio &a, ifstream &f, ofstream &s) {
+    cout << " Voy a ejecutar orden" << endl;
+    int lng=orden.size();
+    if(orden[lng-1]=='\r'){
+        orden.erase(lng-1,1);
+    }
+    if (orden.compare("AC")==0) ordenac(a, f, s); // Añadir una Canción al repertorio
+
+    else if (orden.compare("OC")==0) ordenoc(a, f, s); // Obtener los datos de una Canción
+
+    else if (orden.compare("EC")==0) ordenec(a, f, s); // Eliminar una canción //TODO: terminar
+
+    else if (orden.compare("MES")==0) ordenmes(a, f, s); // Modificar Escuchada
+
+    else if (orden.compare("LR")==0) ordenlr(a, f, s); // Listar todas las canciones del repertorio
+    else {
+        cout << "No ejecuto orden" << endl;
+    }
+}
+
+int main () {
+    ifstream f;
+    f.open("entrada.txt");
+    ofstream s;
+    s.open("salida.txt");
+
+    string orden;
+    repertorio a;
+    crear(a, "Mi repertorio de canciones");
+
+    if (f.is_open() && s.is_open()) {
+        while (!f.eof()) {
+            getline(f, orden);
+            ejecutarOrden(orden, a, f, s);
+        }
+    }
+
     return 0;
 }

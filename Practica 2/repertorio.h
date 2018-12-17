@@ -10,8 +10,10 @@
 #define REPERTORIO_H
 
 #include <string>
-#include "coleccionConMarca.h"
+#include "string_lib.h"
 #include "cancion.h"
+#include "coleccionConMarca.h"
+
 
 
 // Interfaz del TAD repertorio. Pre-declaraciones:
