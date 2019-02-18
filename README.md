@@ -11,30 +11,6 @@ Codigo correspondiente a las practicas de EDA del curso 2018-2019
    * En el se encuentra tambien el modulo generico Diccionario(diccionario.h) que define el tipo de datos sobre el que se va a trabajar
    
    
-## Practica 1(tareas pendientes):
-   *  Recopilacion:
-      * ##  existe(falta probar)
-      * ##  introducir
-      * ##  obtenerDato
-      * ##  recolocarEnPuesto
-      * ##  eliminarXPuesto
-      * ##  obtenerXPuesto
-      * ##  puestoDeClave
-      * ##  iniciarIterador
-      * ##  existeSiguiente
-      * ##  siguienteClave
-      * ##  siguienteDato
-      * ##  avanza
-      
-   *  albumDeCanciones
-      * ##  crear
-      * ##  numeroDeCanciones
-      * ##  duracion
-      * ##  existeCancion
-      * ##  obtenerCancion
-      * ##  añadirCancion
-      * ##  eliminarCancion
-      * ##  puestoDeCancion
-      * ##  cancionDePuesto
-      * ##  intercambiarCanciones
-      * ##  listarAlbum
+| nombre | apellidos |
+| ------ | --------- |
+| prueba1 | aaa |
