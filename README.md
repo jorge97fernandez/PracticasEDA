@@ -14,3 +14,6 @@ Codigo correspondiente a las practicas de EDA del curso 2018-2019
 ## Practica 1
   * Contiene la implementación de una recopilacion de pares generica (recopilacion.h)
   * Además se realizó la implementación de un album de canciones, haciendo uso de la recopilacion (albumCanciones.cc y .h)
+
+## Practica 2
+  * En esta practica se realizó una implementacion de la practia 1, pero en este caso sobre un ABB, mientras en la practica 1 era una lista
