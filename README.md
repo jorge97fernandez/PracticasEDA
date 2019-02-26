@@ -11,6 +11,6 @@ Codigo correspondiente a las practicas de EDA del curso 2018-2019
    * En el se encuentra tambien el modulo generico Diccionario(diccionario.h) que define el tipo de datos sobre el que se va a trabajar
    
    
-| nombre | apellidos |
-| ------ | --------- |
-| prueba1 | aaa |
+## Practica 1
+  * Contiene la implementación de una recopilacion de pares generica (recopilacion.h)
+  * Además se realizó la implementación de un album de canciones, haciendo uso de la recopilacion (albumCanciones.cc y .h)
